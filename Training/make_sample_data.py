@@ -6,8 +6,13 @@ so you can test-run the training pipeline before plugging in the real data.
 DO NOT use this synthetic data for your actual project results/accuracy
 numbers -- it's just a schema-compatible stand-in for local testing.
 """
+import os
+
 import numpy as np
 import pandas as pd
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUT_PATH = os.path.join(BASE_DIR, "..", "Dataset", "loan_data.csv")
 
 rng = np.random.default_rng(42)
 n = 200
@@ -55,5 +60,5 @@ for col in ["Gender", "Married", "Dependents", "Self_Employed", "LoanAmount", "L
     idx = rng.choice(n, size=int(n * 0.03) + 1, replace=False)
     df.loc[idx, col] = np.nan
 
-df.to_csv("data/loan_data.csv", index=False)
-print(f"Wrote {len(df)} rows to data/loan_data.csv")
+df.to_csv(OUT_PATH, index=False)
+print(f"Wrote {len(df)} rows to {OUT_PATH}")

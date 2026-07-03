@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartLender — Result</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="ledger-line"></div>
+
+<main class="result-wrap">
+  <div class="result-card {{ 'approved' if approved else 'declined' }}">
+    <span class="stamp">{{ 'APPROVED' if approved else 'NOT APPROVED' }}</span>
+    <h1>{{ 'This application looks fundable.' if approved else 'This application needs a closer look.' }}</h1>
+    {% if confidence %}
+    <p class="confidence">Model confidence: <b>{{ confidence }}%</b></p>
+    {% endif %}
+    <p class="note">
+      {% if approved %}
+        Based on the applicant's income, credit history, and loan terms, the model predicts a high likelihood of repayment.
+      {% else %}
+        The model flags this profile as higher risk — consider requesting additional documentation or manual review.
+      {% endif %}
+    </p>
+    <a href="/" class="submit-btn">Evaluate another application</a>
+  </div>
+</main>
+
+</body>
+</html>

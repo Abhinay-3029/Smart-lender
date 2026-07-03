@@ -19,24 +19,26 @@ LoanAmount, Loan_Amount_Term, Credit_History, Property_Area, Loan_Status).
 Download it from Kaggle:
 **https://www.kaggle.com/datasets/ninzaami/loan-predication**
 
-Save the CSV as `data/loan_data.csv` (replacing the synthetic sample that's
+Save the CSV as `Dataset/loan_data.csv` (replacing the synthetic sample that's
 there now — that sample only exists so this pipeline runs out of the box for
 testing; don't report its accuracy numbers as your project results).
 
 ## 3. Train the models
 
 ```bash
+cd Training
 python train_model.py
 ```
 
 This trains Decision Tree, Random Forest, KNN, and XGBoost, prints train/test
-accuracy for each, and saves the best one to `model/model.pkl` (along with
-`model/encoders.pkl` for consistent preprocessing and `model/metrics.json`
-for your report/documentation).
+accuracy for each, and saves the best one straight into `Flask/model.pkl`
+(along with `Flask/encoders.pkl` for consistent preprocessing and
+`Flask/metrics.json` for your report/documentation).
 
 ## 4. Run the web app
 
 ```bash
+cd Flask
 python app.py
 ```
 
@@ -47,21 +49,37 @@ Approved / Not Approved prediction with confidence score.
 
 ```
 SmartLender/
-├── data/
-│   ├── loan_data.csv        <- replace with the real Kaggle dataset
-│   └── make_sample_data.py  <- generates the placeholder sample
-├── model/
-│   ├── model.pkl             <- best trained model (created by train_model.py)
-│   ├── encoders.pkl          <- label encoders (created by train_model.py)
-│   └── metrics.json          <- accuracy comparison across all 4 models
-├── templates/
-│   ├── index.html            <- application form
-│   └── result.html           <- prediction result
-├── static/
-│   └── style.css
-├── train_model.py
-├── app.py
+├── Dataset/
+│   └── loan_data.csv          <- replace with the real Kaggle dataset
+├── Training/
+│   ├── make_sample_data.py    <- generates the placeholder sample
+│   └── train_model.py         <- trains all 4 models, saves the best into Flask/
+├── Flask/
+│   ├── app.py
+│   ├── train_model.py         <- copy of Training/train_model.py (app.py imports FEATURE_COLS/CATEGORICAL_COLS from it)
+│   ├── model.pkl              <- best trained model
+│   ├── encoders.pkl           <- label encoders
+│   ├── metrics.json           <- accuracy comparison across all 4 models
+│   ├── templates/
+│   │   ├── index.html         <- application form
+│   │   └── result.html        <- prediction result
+│   └── static/
+│       └── style.css
+├── wsgi.py                    <- entry point for deployment (gunicorn wsgi:app)
+├── Procfile
 └── requirements.txt
 ```
+
+## 5. Deploy
+
+`requirements.txt` already includes `gunicorn`. From the repo root:
+
+```bash
+gunicorn wsgi:app
+```
+
+`wsgi.py` points at the app inside `Flask/`, so this works the same way
+locally and on a host like Render/Railway (which will run this same
+command from the `Procfile`).
 
 

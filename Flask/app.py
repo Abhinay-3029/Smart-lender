@@ -8,16 +8,26 @@ Usage:
     python app.py
 Then visit http://127.0.0.1:5000
 """
+import os
+import sys
+
 import joblib
 import pandas as pd
 from flask import Flask, render_template, request
+
+# Make sure this folder is importable regardless of the working directory
+# the app is launched from (matters for gunicorn/production, not just
+# `python app.py`).
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
 from train_model import FEATURE_COLS, CATEGORICAL_COLS
 
 app = Flask(__name__)
 
-MODEL_PATH = "model/model.pkl"
-ENCODERS_PATH = "model/encoders.pkl"
+MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
+ENCODERS_PATH = os.path.join(BASE_DIR, "encoders.pkl")
 
 model = joblib.load(MODEL_PATH)
 encoders = joblib.load(ENCODERS_PATH)

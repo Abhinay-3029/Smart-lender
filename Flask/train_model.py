@@ -9,6 +9,7 @@ Usage:
     python train_model.py
 """
 import json
+import os
 import warnings
 
 import joblib
@@ -28,10 +29,11 @@ except ImportError:
     HAS_XGBOOST = False
     warnings.warn("xgboost not installed - run `pip install xgboost` to include it (see requirements.txt)")
 
-DATA_PATH = "data/loan_data.csv"
-MODEL_PATH = "model/model.pkl"
-ENCODERS_PATH = "model/encoders.pkl"
-METRICS_PATH = "model/metrics.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "..", "Dataset", "loan_data.csv")
+MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
+ENCODERS_PATH = os.path.join(BASE_DIR, "encoders.pkl")
+METRICS_PATH = os.path.join(BASE_DIR, "metrics.json")
 
 CATEGORICAL_COLS = ["Gender", "Married", "Education", "Self_Employed", "Property_Area"]
 NUMERIC_COLS = ["ApplicantIncome", "CoapplicantIncome", "LoanAmount", "Loan_Amount_Term", "Credit_History"]
