@@ -64,12 +64,4 @@ SmartLender/
 └── requirements.txt
 ```
 
-## Next steps for your project phases
 
-- **Testing phase**: add a `tests/` folder with a few `pytest` cases that
-  hit `/predict` with known inputs and assert the response status/content.
-- **Deployment (IBM Cloud)**: your README mentions IBM Cloud — once this runs
-  locally, we can containerize it (Dockerfile) or wire up IBM Cloud Foundry /
-  Code Engine deployment next.
-- **Documentation**: `model/metrics.json` gives you ready numbers to drop
-  into your Project_Documentation folder.
