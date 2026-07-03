@@ -1,0 +1,30 @@
+{
+  "best_model": "Random Forest",
+  "results": {
+    "Decision Tree": {
+      "train_accuracy": 100.0,
+      "test_accuracy": 72.5
+    },
+    "Random Forest": {
+      "train_accuracy": 100.0,
+      "test_accuracy": 80.0
+    },
+    "KNN": {
+      "train_accuracy": 81.88,
+      "test_accuracy": 80.0
+    }
+  },
+  "feature_cols": [
+    "Gender",
+    "Married",
+    "Dependents",
+    "Education",
+    "Self_Employed",
+    "ApplicantIncome",
+    "CoapplicantIncome",
+    "LoanAmount",
+    "Loan_Amount_Term",
+    "Credit_History",
+    "Property_Area"
+  ]
+}

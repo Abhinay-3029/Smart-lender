@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartLender — Loan Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="ledger-line"></div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Smart<b>Lender</b></span>
+    <h1>Know your credit standing<br>before the queue does.</h1>
+    <p class="sub">Fill in the applicant details below. Our trained model reads them the same way a credit officer would — and answers in seconds.</p>
+  </div>
+</header>
+
+<main class="form-wrap">
+  <form action="/predict" method="POST" class="ledger-form">
+
+    <fieldset>
+      <legend>Applicant</legend>
+      <div class="row">
+        <label>Gender
+          <select name="Gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </label>
+        <label>Marital status
+          <select name="Married" required>
+            <option value="Yes">Married</option>
+            <option value="No">Single</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Dependents
+          <select name="Dependents" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3+">3+</option>
+          </select>
+        </label>
+        <label>Education
+          <select name="Education" required>
+            <option value="Graduate">Graduate</option>
+            <option value="Not Graduate">Not graduate</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Employment
+          <select name="Self_Employed" required>
+            <option value="No">Salaried</option>
+            <option value="Yes">Self-employed</option>
+          </select>
+        </label>
+        <label>Property area
+          <select name="Property_Area" required>
+            <option value="Urban">Urban</option>
+            <option value="Semiurban">Semiurban</option>
+            <option value="Rural">Rural</option>
+          </select>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Finances</legend>
+      <div class="row">
+        <label>Applicant income <span>(monthly, ₹)</span>
+          <input type="number" name="ApplicantIncome" min="0" step="1" required placeholder="e.g. 5000">
+        </label>
+        <label>Co-applicant income <span>(monthly, ₹)</span>
+          <input type="number" name="CoapplicantIncome" min="0" step="1" placeholder="0">
+        </label>
+      </div>
+      <div class="row">
+        <label>Loan amount <span>(₹ thousands)</span>
+          <input type="number" name="LoanAmount" min="0" step="1" required placeholder="e.g. 150">
+        </label>
+        <label>Loan term <span>(months)</span>
+          <select name="Loan_Amount_Term" required>
+            <option value="360">360</option>
+            <option value="180">180</option>
+            <option value="120">120</option>
+            <option value="60">60</option>
+            <option value="12">12</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Credit history
+          <select name="Credit_History" required>
+            <option value="1">Good — meets guidelines</option>
+            <option value="0">Poor / none</option>
+          </select>
+        </label>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="submit-btn">Evaluate application</button>
+  </form>
+</main>
+
+<footer>
+  <p>SmartLender · trained on Decision Tree, Random Forest, KNN &amp; XGBoost — best model auto-selected.</p>
+</footer>
+
+</body>
+</html>
