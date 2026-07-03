@@ -42,7 +42,7 @@ cd Flask
 python app.py
 ```
 
-Visit **https://smart-lender-2.onrender.com** — fill in the form, get an instant
+Visit **https://smart-loan-lender.onrender.com** — fill in the form, get an instant
 Approved / Not Approved prediction with confidence score.
 
 ## Project structure
